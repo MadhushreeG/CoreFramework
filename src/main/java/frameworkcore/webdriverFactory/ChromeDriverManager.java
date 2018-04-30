@@ -23,11 +23,10 @@ class ChromeDriverManager  {
 	private static ChromeOptions options;
     
 	static WebDriver createDriver() throws InvocationTargetException, IllegalAccessException{
-		//System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir") + "/src/main/resources/Drivers/chromedriver.exe");
-        //driver = new ChromeDriver(GetOptions());
+		
 		logger.info("Starting ChromeDriver");
 		System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir") + "/src/main/resources/Drivers/chromedriver");
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(GetOptions());
         return driver;
     }
     
@@ -37,16 +36,15 @@ class ChromeDriverManager  {
 	 */
     private static ChromeOptions GetOptions() {
     	
-    	
+    	logger.info("Setting Chrome Options");
     	options = new ChromeOptions();
-    	//options.setBinary(new File(System.getProperty("user.dir") + "/src/main/resources/Drivers/chromedriver.exe"));
-		//options.addArguments("--silent");
 		options.addArguments("--disable-extensions");
 		options.addArguments("test-type");
 		options.addArguments("start-maximized");
 		options.addArguments("disable-infobars");
 		options.setAcceptInsecureCerts(true);
 		options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+		//options.addArguments("--silent");
 		//options.setHeadless(true);
 		//options.addArguments("--disable-gpu");
     	

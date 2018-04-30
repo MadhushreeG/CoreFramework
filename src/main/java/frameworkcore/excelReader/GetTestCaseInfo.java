@@ -1,6 +1,3 @@
-/**
- * This project is using Spring 
- */
 package frameworkcore.excelReader;
 
 import java.io.File;
@@ -15,7 +12,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
@@ -56,10 +52,10 @@ public class GetTestCaseInfo {
 		logger.info("Threadcount is " + row.getCell(1).toString());
 		logger.info("Verbose mode is " + row.getCell(2).toString());
 		logger.info("Preserve Order mode is " + row.getCell(3).toString());
-		logger.info("Suite Name is " + row.getCell(3).toString());
+		logger.info("Suite Name is " + row.getCell(4).toString());
 		
 		try{
-		TestNGConfig.put("Parallel", row.getCell(0).toString());
+		TestNGConfig.put("ParallelMode", row.getCell(0).toString());
 		TestNGConfig.put("ThreadCount", row.getCell(1).toString());
 		TestNGConfig.put("Verbose", row.getCell(2).toString());
 		TestNGConfig.put("PreserveOrder", row.getCell(3).toString());

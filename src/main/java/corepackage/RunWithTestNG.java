@@ -54,9 +54,16 @@ public class RunWithTestNG {
 		logger.info("Generating TestNG.xml file");
 		
 		XmlSuite suite = new XmlSuite();
-		suite.setName("TestAutomastionSuite");
-		suite.setParallel(XmlSuite.ParallelMode.TESTS);
-		suite.setThreadCount(2);
+		suite.setName(TestNGConfig.get("AutomationSuiteName"));
+		
+		if(TestNGConfig.get("ParallelMode").toString().equalsIgnoreCase("True"))
+			suite.setParallel(XmlSuite.ParallelMode.TESTS);
+		else
+			suite.setParallel(XmlSuite.ParallelMode.NONE);
+		
+		//suite.setVerbose(Integer.parseInt(TestNGConfig.get("ParallelMode")));
+		
+		suite.setThreadCount(Integer.parseInt(TestNGConfig.get("ThreadCount")));
 		//suite.addListener("frameworkcore.ReportingClass.ListenersImpl");
 		
 		for (String key : TestsBrowserList.keySet()){
@@ -75,6 +82,7 @@ public class RunWithTestNG {
 		        ArrayList<XmlInclude> methodsToRun = new ArrayList<XmlInclude>();
 		        for(String method: methodvalues){
 		        	if(method.toLowerCase().contains("tag")||method.toLowerCase().contains("ignore"))
+		        		
 		        		logger.info("Method  " + method + "  will not run" );
 		        	else
 		        		methodsToRun.add(new XmlInclude(method));
@@ -98,10 +106,8 @@ public class RunWithTestNG {
 		        writer.close();
 		        logger.info("TestNG file Generated Successfully");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	       
 		
 		TestNG tng = new TestNG();
 		tng.setXmlSuites(suites);

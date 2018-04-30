@@ -1,6 +1,7 @@
 package frameworkcore.webdriverFactory;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -15,34 +16,27 @@ public class DriverManager {
 			
 	        switch (PlatformName) {
 	            case "Chrome":
-	            	logger.info("Running Test on Chrome");
 	            	setWebDriver(ChromeDriverManager.createDriver());
-	            	//driver = getDriver();
 	                break;
 	                
 	            case "Firefox":
-	            	logger.info("Running Test on FireFox");
-	                //driver = FirefoxDriverManager.createDriver();
+	            	setWebDriver(FirefoxDriverManager.createDriver());
 	                break;
 	                
 	            case "IE":
-	            	logger.info("Running Test on IE");
-	                //driver = IEDriverManager.createDriver();
+	            	setWebDriver(IEDriverManager.createDriver());
 	                break;
 	                
 	            case "Safari":    
-	            	logger.info("Running Test on Safari");
-	                //driver = SafariDriverManager.createDriver();
+	            	setWebDriver(SafariDriverManager.createDriver());
 	                break;
 	                
 	            case "Android":
-	            	logger.info("Running Test on Safari");
-	                //driver = AndroidDriverManager.createDriver();
+	            	setWebDriver(AndroidDriverManager.createDriver());
 	                break;
 	            	
 	            case "iOS":
-	            	logger.info("Running Test on Safari");
-	                //driver = iOSDriverManager.createDriver();
+	            	setWebDriver(iOSDriverManager.createDriver());
 	                break;
 	                
 	            case "RemoteChrome":
@@ -53,8 +47,6 @@ public class DriverManager {
 	            	setWebDriver(ChromeDriverManager.createDriver());
 	                break;
 	        }
-	        
-
 	    }
 		
 		public static WebDriver getDriver() {
@@ -62,7 +54,14 @@ public class DriverManager {
 	    }
 	 
 	    static void setWebDriver(WebDriver driver) {
+	    	SetDriverConfiguration(driver);
 	    	Webdriver.set(driver);
+	    }
+	    
+	    private static void SetDriverConfiguration(WebDriver driver) {
+	    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().deleteAllCookies();
+			driver.manage().window().maximize();
 	    }
 		
 		public static void quitDriver(){
