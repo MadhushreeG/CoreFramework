@@ -1,5 +1,9 @@
 /**
- * This project is using Spring 
+ * Core Framework
+ * Author : Deepak Tiwari
+ * Creation Date : 27 Apr 2018
+ * Modified Date : 
+ * Modified By : 
  */
 package frameworkcore.webdriverFactory;
 
@@ -10,10 +14,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-/**
- * @author dtiwa1
- *
- */
 public class IEDriverManager  {
 	
 	private static WebDriver driver;

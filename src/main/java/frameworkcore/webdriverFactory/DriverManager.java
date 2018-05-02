@@ -1,3 +1,10 @@
+/**
+ * Core Framework
+ * Author : Deepak Tiwari
+ * Creation Date : 27 Apr 2018
+ * Modified Date : 
+ * Modified By : 
+ */
 package frameworkcore.webdriverFactory;
 
 import java.lang.reflect.InvocationTargetException;
@@ -7,6 +14,9 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This class manages the instantiation of the drivers based on the value provided by the TestNG.xml
+ */
 public class DriverManager {
 	
 	private static Logger logger = LoggerFactory.getLogger(DriverManager.class);

@@ -1,5 +1,9 @@
 /**
- * This Class is responsible to instantiate ChromeDriver
+ * Core Framework
+ * Author : Deepak Tiwari
+ * Creation Date : 27 Apr 2018
+ * Modified Date : 
+ * Modified By : 
  */
 package frameworkcore.webdriverFactory;
 
@@ -13,8 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author deepaktiwari
- *
+ * This instantiates the ChromeDriver 
  */
 class ChromeDriverManager  {
 	

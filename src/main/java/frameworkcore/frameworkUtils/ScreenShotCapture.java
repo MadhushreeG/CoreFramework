@@ -1,5 +1,9 @@
 /**
- * This project is using Spring 
+ * Core Framework
+ * Author : Deepak Tiwari
+ * Creation Date : 27 Apr 2018
+ * Modified Date : 
+ * Modified By : 
  */
 package frameworkcore.frameworkUtils;
 
@@ -10,22 +14,29 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.imageio.ImageIO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * @author dtiwa1
- *
+ * The below class is used to capture the screenshot and returns the path of the captured screenshot
  */
 public class ScreenShotCapture {
+	
+	private static Logger logger = LoggerFactory.getLogger(ScreenShotCapture.class);
 	
 	public static String TakeScreenShot(){
 		
 		String ImagePath = System.getProperty("user.dir") +"/Reporting/Screenshots/" + GetCurrentTimeStamp() + "_ErrorScreenshot.png";
 		try{
-		BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-		ImageIO.write(image, "png", new File(ImagePath));
-		return ImagePath;
+			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+			ImageIO.write(image, "png", new File(ImagePath));
+			return ImagePath;
 		}catch(Exception e){
+			logger.error("Not able to capture ScreenShot");
+			logger.error(e.getMessage().toString());
 			return "";
 		}
 	}

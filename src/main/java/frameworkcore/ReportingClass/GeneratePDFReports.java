@@ -1,8 +1,14 @@
+/**
+ * Core Framework
+ * Author : Deepak Tiwari
+ * Creation Date : 27 Apr 2018
+ * Modified Date : 
+ * Modified By : 
+ */
 package frameworkcore.ReportingClass;
 
 /**
- * @author dtiwa1
- *
+ * This class is used to create PDF reports
  */
 public class GeneratePDFReports {
 	

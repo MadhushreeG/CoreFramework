@@ -1,3 +1,10 @@
+/**
+ * Core Framework
+ * Author : Deepak Tiwari
+ * Creation Date : 27 Apr 2018
+ * Modified Date : 
+ * Modified By : 
+ */
 package frameworkcore.ReportingClass;
 
 import java.util.List;
@@ -18,15 +25,10 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 /**
- * @author dtiwa1
- *
+ * This is TestNG Listener class
  */
 public class ListenersImpl implements ITestListener, IReporter, ISuiteListener{
 
-	/* (non-Javadoc)
-	 * @see org.testng.ITestListener#onTestStart(org.testng.ITestResult)
-	 */
-	
 	ExtentReports reporter=null;
 	public static  ExtentTest parentTest;
 	private static Logger logger = LoggerFactory.getLogger(ListenersImpl.class);
@@ -39,9 +41,7 @@ public class ListenersImpl implements ITestListener, IReporter, ISuiteListener{
 		parentTest = reporter.createTest(result.getName());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.testng.ITestListener#onTestSuccess(org.testng.ITestResult)
-	 */
+
 	@Override
 	public void onTestSuccess(ITestResult result) {
 
@@ -51,9 +51,7 @@ public class ListenersImpl implements ITestListener, IReporter, ISuiteListener{
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see org.testng.ITestListener#onTestFailure(org.testng.ITestResult)
-	 */
+
 	@Override
 	public void onTestFailure(ITestResult result) {
 
@@ -62,9 +60,7 @@ public class ListenersImpl implements ITestListener, IReporter, ISuiteListener{
 		reporter.flush();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.testng.ITestListener#onTestSkipped(org.testng.ITestResult)
-	 */
+
 	@Override
 	public void onTestSkipped(ITestResult result) {
 
@@ -73,43 +69,33 @@ public class ListenersImpl implements ITestListener, IReporter, ISuiteListener{
 		reporter.flush();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.testng.ITestListener#onTestFailedButWithinSuccessPercentage(org.testng.ITestResult)
-	 */
+
 	@Override
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see org.testng.ITestListener#onStart(org.testng.ITestContext)
-	 */
+
 	@Override
 	public void onStart(ITestContext context) {
 		//logger.info(context.getName() + " Test is Started");
 	}
 
-	/* (non-Javadoc)
-	 * @see org.testng.ITestListener#onFinish(org.testng.ITestContext)
-	 */
+
 	@Override
 	public void onFinish(ITestContext context) {
 		//logger.info(context.getName() + " Test is Finished");
 	}
 
-	/* (non-Javadoc)
-	 * @see org.testng.IReporter#generateReport(java.util.List, java.util.List, java.lang.String)
-	 */
+
 	@Override
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see org.testng.ISuiteListener#onStart(org.testng.ISuite)
-	 */
+
 	@Override
 	public void onStart(ISuite suite) {
 		
@@ -117,9 +103,7 @@ public class ListenersImpl implements ITestListener, IReporter, ISuiteListener{
 		//Reporting.getreporter().flush();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.testng.ISuiteListener#onFinish(org.testng.ISuite)
-	 */
+
 	@Override
 	public void onFinish(ISuite suite) {
 		logger.info("Finishing Suite " + suite.getName());

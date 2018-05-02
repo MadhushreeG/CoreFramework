@@ -1,5 +1,9 @@
 /**
- *
+ * Core Framework
+ * Author : Deepak Tiwari
+ * Creation Date : 27 Apr 2018
+ * Modified Date : 
+ * Modified By : 
  */
 package corepackage;
 
@@ -19,7 +23,6 @@ import org.testng.TestNG;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlSuite;
-import org.testng.xml.XmlSuite.ParallelMode;
 import org.testng.xml.XmlTest;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -27,10 +30,7 @@ import com.google.common.collect.Multimap;
 
 import frameworkcore.excelReader.GetTestCaseInfo;
 
-/**
- * @author dtiwa1
- *
- */
+
 public class RunWithTestNG {
 	
 	private static Logger logger = LoggerFactory.getLogger(RunWithTestNG.class);
@@ -40,8 +40,14 @@ public class RunWithTestNG {
 	private static Multimap<String, String> ClassesMethodList = ArrayListMultimap.create();
 	private static Hashtable<String, String> TestNGConfig = new Hashtable<String, String>();
 	
-	
-	public static void ExecuteTests(){
+	/**
+	 * This method gets the information from the "GetTestCaseInformation()" method.
+	 * The information contains the class and method names to run from excel
+	 * The information also contains the TestNG configuration information from the excel
+	 * It creates the TestNG.xml file based on the information gathered
+	 * Finally it triggers the execution through TestNG 
+	 */
+	public static void ExecuteTests() throws IOException{
 		
 		GetTestCaseInfo.GetTestCaseInformation();
 		TestsBrowserList = GetTestCaseInfo.getTestsBrowserList();
@@ -53,6 +59,9 @@ public class RunWithTestNG {
 		
 		logger.info("Generating TestNG.xml file");
 		
+		/**
+		 * The below code creates testNG xmlSuite and sets the configuration
+		 */
 		XmlSuite suite = new XmlSuite();
 		suite.setName(TestNGConfig.get("AutomationSuiteName"));
 		
@@ -61,11 +70,20 @@ public class RunWithTestNG {
 		else
 			suite.setParallel(XmlSuite.ParallelMode.NONE);
 		
-		//suite.setVerbose(Integer.parseInt(TestNGConfig.get("ParallelMode")));
-		
+		suite.setVerbose(Integer.parseInt(TestNGConfig.get("Verbose")));
 		suite.setThreadCount(Integer.parseInt(TestNGConfig.get("ThreadCount")));
+		
+		if(TestNGConfig.get("PreserveOrder").toString().equalsIgnoreCase("True"))
+			suite.setPreserveOrder(Boolean.TRUE);
+		else 
+			suite.setPreserveOrder(Boolean.FALSE);
+		
+
 		//suite.addListener("frameworkcore.ReportingClass.ListenersImpl");
 		
+		/**
+		 * The below code assigns the Test classes/mathods/parameters to the TestNG Suite
+		 */
 		for (String key : TestsBrowserList.keySet()){
 			ArrayList<XmlClass> classes = new ArrayList<XmlClass>();
 			XmlTest test = new XmlTest(suite);
@@ -95,29 +113,28 @@ public class RunWithTestNG {
 		}
 		
 		suites.add(suite);
-		/*List<XmlSuite> suites = new ArrayList<XmlSuite>();
-		suites.add(suite);*/
 		
+		/**
+		 * Writing the TestNG.xml information to a file
+		 */
 		 FileWriter writer;
-		try {
 			writer = new FileWriter(new File("TestNG.xml"));
 			 writer.write(suite.toXml());
 		        writer.flush();
 		        writer.close();
 		        logger.info("TestNG file Generated Successfully");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		
 		TestNG tng = new TestNG();
 		tng.setXmlSuites(suites);
-		tng.setParallel(ParallelMode.TESTS);
-		tng.run();
+		tng.run();  
 		
 	}
 	
+	/**
+	 * Iterates through the test cases and sets parameters for them
+	 */
 	private static void SetParameters(XmlTest test){
-		//System.out.println(TestsParamList.get(test.getName());
 		 for (Map.Entry<String,String> entry : TestsParamList.get(test.getName()).entrySet()){
 			 test.addParameter(entry.getKey(), entry.getValue());
 		 }

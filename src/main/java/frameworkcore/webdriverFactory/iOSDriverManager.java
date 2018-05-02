@@ -1,5 +1,9 @@
 /**
- * This project is using Spring 
+ * Core Framework
+ * Author : Deepak Tiwari
+ * Creation Date : 27 Apr 2018
+ * Modified Date : 
+ * Modified By : 
  */
 package frameworkcore.webdriverFactory;
 
@@ -15,10 +19,6 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.AndroidServerFlag;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 
-/**
- * @author dtiwa1
- *
- */
 public class iOSDriverManager  {
 	
 	private static WebDriver driver;

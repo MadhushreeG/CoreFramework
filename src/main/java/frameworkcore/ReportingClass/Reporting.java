@@ -1,3 +1,10 @@
+/**
+ * Core Framework
+ * Author : Deepak Tiwari
+ * Creation Date : 27 Apr 2018
+ * Modified Date : 
+ * Modified By : 
+ */
 package frameworkcore.ReportingClass;
 
 import java.io.File;
@@ -12,6 +19,9 @@ import org.slf4j.LoggerFactory;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
+/**
+ * This class creates extent report instance which can be used by the tests
+ */
 public class Reporting {
   
 	private static ExtentReports extentReports = null;
@@ -51,22 +61,24 @@ public class Reporting {
 		return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 	}
 	
-public synchronized static String CaptureScreenShot(WebDriver driver) {
+	/**
+	 * The below method is used to capture the screenshot and returns the path of the captured screenshot
+	 */
+	public synchronized static String CaptureScreenShot(WebDriver driver) {
 		
-	String dest = "";
+		String dest = "";
 		
-	try{
-			
-			TakesScreenshot ts = (TakesScreenshot)driver;
-	       File source = ts.getScreenshotAs(OutputType.FILE);
-	        dest = System.getProperty("user.dir") +"/Reporting/Screenshots/" + GetCurrentTimeStamp() + "_ErrorScreenshot.png";
-	        File destination = new File(dest);
-	        FileUtils.copyFile(source, destination); 
-	        return dest;
-		}catch(Exception e){
-			logger.error(e.getMessage().toString());
-		}
-		return dest;
+		try{
+				TakesScreenshot ts = (TakesScreenshot)driver;
+		       File source = ts.getScreenshotAs(OutputType.FILE);
+		        dest = System.getProperty("user.dir") +"/Reporting/Screenshots/" + GetCurrentTimeStamp() + "_ErrorScreenshot.png";
+		        File destination = new File(dest);
+		        FileUtils.copyFile(source, destination); 
+		        return dest;
+			}catch(Exception e){
+				logger.error(e.getMessage().toString());
+			}
+			return dest;
 	}
 
 	public synchronized static void FlushReport() { 

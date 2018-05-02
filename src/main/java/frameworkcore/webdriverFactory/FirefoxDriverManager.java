@@ -1,5 +1,9 @@
 /**
- * This project is using Spring 
+ * Core Framework
+ * Author : Deepak Tiwari
+ * Creation Date : 27 Apr 2018
+ * Modified Date : 
+ * Modified By : 
  */
 package frameworkcore.webdriverFactory;
 
@@ -11,8 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author dtiwa1
- *
+ * This instantiates the FireFoxDriver 
  */
 public class FirefoxDriverManager  {
 	
@@ -31,11 +34,11 @@ public class FirefoxDriverManager  {
     	
     	logger.info("Setting Firefox Options");
     	options = new FirefoxOptions();
-		options.addArguments("--disable-extensions");
-		options.addArguments("test-type");
-		options.addArguments("start-maximized");
-		options.addArguments("disable-infobars");
-		options.setAcceptInsecureCerts(true);
+//		options.addArguments("--disable-extensions");
+//		options.addArguments("test-type");
+//		options.addArguments("start-maximized");
+//		options.addArguments("disable-infobars");
+//		options.setAcceptInsecureCerts(true);
 		options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
     	return options;
        
